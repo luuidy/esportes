@@ -2,8 +2,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const flash = require('req-flash')
+require('dotenv/config');
 let session = require('express-session')
 let port = process.env.PORT || 3000
+
 
 const app = express()
 
