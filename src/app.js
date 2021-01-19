@@ -16,13 +16,15 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(flash())
 app.use(express.static(path.join("src", "public")))
 
+
 // settings
-app.set("view engine", "ejs")
-app.set("view", 'src/views')
+app.set("views engine", "ejs")
+app.set("views", 'src/views')
 
-app.get('/', (req, res)=> {
-    res.send('hello world');
-});
 
+// routes
+app.use('/admin/produto', require('./routes/produtoRoute'))
+//app.use('/admin/quadra', require('./routes/quadraRoute'))
+//app.use('/admin/caixa', require('./routes/caixaRoute'))
 
 app.listen(port, console.log(`Server On: http://localhost:${port}`))
