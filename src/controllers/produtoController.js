@@ -10,7 +10,7 @@ exports.list = async (req, res) => {
 }
 
 exports.filtro = async (req, res) => {
-    let query = req.body.filtro
+    let query = `%${req.body.filtro}%`
     const produtos = await ProdutoModel.findAll({
         where:{
             nome: {
