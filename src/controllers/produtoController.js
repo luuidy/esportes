@@ -1,11 +1,25 @@
 const ProdutoModel = require('../models/Produto')
 
 exports.list = async (req, res) => {
-
+        try {
+            const produtos = await ProdutoModel.findAll()
+            return res.render('admin/produto/list.ejs', {'Produtos':produtos, 'mag': req.flash('msg')})
+        } catch (error) {
+            req.flash('msg', "Problema ao adicionar o produto")
+        }
 }
 
 exports.filtro = async (req, res) => {
-    
+    let query = req.body.filtro
+    const produtos = await ProdutoModel.findAll({
+        where:{
+            nome: {
+                [Op.like]: query
+            }
+        }
+    })
+    return res.render('admin/produto/list.ejs', {'Produtos':produtos, 'mag': req.flash('msg')})
+
 }
 
 exports.abreAdd = async (req, res) => {
